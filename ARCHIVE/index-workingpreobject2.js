@@ -86,9 +86,16 @@ function getPlayerName (){
 }
 
 // This is the current way to add a new player and reset the game....
+
+
+
+
 $('#newPlayer').on('click', function(e){
   e.preventDefault;
-  getPlayerName();
+
+  $('#getPlayerName').fancybox().click();
+
+  // getPlayerName();
   setTimeout( function(){resetTheGame(false,randomNumber(),500)}, 500);
 
 });
@@ -99,7 +106,7 @@ $('#newGame').on('click', function(e){
 });
 
 // This is the current way to get the user names.... 
-getPlayerName();
+// getPlayerName();
 
 // This was clipped from the web https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
 function sortThis(board){

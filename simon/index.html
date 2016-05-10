@@ -2,15 +2,29 @@
 <html>
 <head>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
-  <script type="text/javascript" src="./js/index-workingpreobject2.js"></script>
+  <script type="text/javascript" src="./js/index.js"></script>
+  
   <link rel="stylesheet" type="text/css" href="./css/reset.css">
   <link rel="stylesheet" type="text/css" href="./css/index.css">
+  
+  <!-- Fancybox Stuff -->
+  <script src="fancybox/source/jquery.fancybox.pack.js"></script>
+  <link rel="stylesheet" href="fancybox/source/jquery.fancybox.css" />
+
   <title>Simon Says</title>
 </head>
 <body>
 
+<!-- This is hidden to get the player name -->
+<div id="getPlayerName" style="display:none">
+  <p>Please tell me your name!<p>
+  <input id="player" type="text"></input>
+</div>
+
+
 <div class="leader-board">
 <h2>LEADER BOARD OF LEGENDS</h2>
+
     <ol id="current-leaders">
 
     </ol>
