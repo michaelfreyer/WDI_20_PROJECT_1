@@ -75,11 +75,11 @@ var playerName;
 function getPlayerName (playerName){
   // playerName = prompt("Please state your name");
 
-  $.each(leaderBoard, function() {
-      if (this.name == playerName) {
-          this.value = lastScore;
-      }
-  });
+  // $.each(leaderBoard, function() {
+  //     if (this.name == playerName) {
+  //         this.value = lastScore;
+  //     }
+  // });
 
   leaderBoard.push({name: playerName , value : 0});
 
@@ -87,6 +87,7 @@ function getPlayerName (playerName){
 
 // This is the current way to add a new player and reset the game....
 $('#newPlayer').on('click', function(e){
+  
   e.preventDefault();
   e.stopPropagation();
   console.log(e);
