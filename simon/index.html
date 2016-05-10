@@ -18,7 +18,44 @@
 <!-- This is hidden to get the player name -->
 <div id="getPlayerName" style="display:none">
   <p>Please tell me your name!<p>
-  <input id="player" type="text"></input>
+  <form id="player">
+
+  <input type="text" id="newPlayerName">
+
+  <br>
+  
+  <input type="submit" id="submit" value="Submit">
+
+  </form>
+</div>
+
+
+<!-- This is hidden to get the player name -->
+<div id="showInstructions" style="display:none">
+  <div id="ruleBox">
+    <br>
+    <h3>These are the game rules </h3>
+    <ol>
+      <br>
+      <br>
+      <li>Simon plays a pattern first</li>
+      <br>
+      <br>
+      <br>
+      <br>
+      <li>You get a turn to play the patern back using UP DOWN LEFT RIGHT</li>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <li>If you play back the correct patern the game goes longer, if you get it wrong you start again</li>
+
+    </ol>
+  </div>
 </div>
 
 
@@ -34,7 +71,7 @@
 
       <ul>
         <li id="newPlayer">NEW PLAYER</li>
-        <!-- <li id="newGame">NEW GAME</li> -->
+        <li id="inst">INSTRUCTIONS</li>
       </ul>
 
       </div>
@@ -79,13 +116,6 @@
 
 </div>
 
-<!-- <div class="leader-board">
-    <ol id="current-leaders">
-      
-
-    </ol>
-
-</div> -->
 
 
 </body>

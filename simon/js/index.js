@@ -72,37 +72,61 @@ var playerName;
 
                       ];
 
-function getPlayerName (){
-  playerName = prompt("Please state your name");
+function getPlayerName (playerName){
+  // playerName = prompt("Please state your name");
 
-  // $.each(leaderBoard, function() {
-  //     if (this.name == playerName) {
-  //         this.value = lastScore;
-  //     }
-  // });
+  $.each(leaderBoard, function() {
+      if (this.name == playerName) {
+          this.value = lastScore;
+      }
+  });
 
   leaderBoard.push({name: playerName , value : 0});
 
 }
 
 // This is the current way to add a new player and reset the game....
-
-
-
-
 $('#newPlayer').on('click', function(e){
-  e.preventDefault;
+  e.preventDefault();
+  e.stopPropagation();
+  console.log(e);
+
 
   $('#getPlayerName').fancybox().click();
 
+  $('#submit').on('click', function (e){
+    console.log(e);
+
+    var tempVal = ($("#newPlayerName").val());
+    if (tempVal != null && tempVal != ""){
+    getPlayerName(tempVal);
+    runGame(500);
+    }
+    else{
+      console.log("it's null!");
+    }
+  });
+
+  $("#player").click(function(e){
+    e.preventDefault();
+    e.stopPropagation();
+
+
+  });
+
   // getPlayerName();
-  setTimeout( function(){resetTheGame(false,randomNumber(),500)}, 500);
+  // setTimeout( function(){resetTheGame(false,randomNumber(),500)}, 500);
 
 });
 
-$('#newGame').on('click', function(e){
+
+
+// Show the insturctions 
+$('#inst').on('click', function(e){
   e.preventDefault;
-  setTimeout( function(){resetTheGame(false,randomNumber(),500)}, 500);
+
+  $('#showInstructions').fancybox().click();
+
 });
 
 // This is the current way to get the user names.... 
@@ -126,7 +150,7 @@ function sortThis(board){
 function displayThis(board){
 console.log("leader Launched");
 
-$('ol').empty();
+$('#current-leaders').empty();
 
   $.each(board, function(i,e){
       $('#current-leaders').append('<li>'+e.name+': '+e.value+'</li>');
@@ -458,7 +482,7 @@ function moves(e) {
 
 
 // Start the game!
-  runGame(500);
+  // runGame(500);
 
 // $document.on('keydown', function(e){
 //   console.log(e.which);
