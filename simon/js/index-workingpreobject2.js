@@ -13,6 +13,9 @@ console.log("I'm on the game");
 // LEADER BOARD
 // List of Scores sorted from top to bottom
 
+
+
+
 // Welcome Diaglog
 // Tell you the game rules - watch the screen for the parten then play the partern
 
@@ -57,7 +60,118 @@ function init (){
   var $document = $(document);
 
 // array that holds all the balues
-  var hiScore = [];
+  var hiScore = [0];
+
+// Player Name to add
+var playerName;
+
+  var leaderBoard = [
+                      // {name : 'Mike'  , value : 3 },
+                      // {name : 'John'  , value : 7 },
+                      // {name : 'Jeffe' , value : 9}
+
+                      ];
+
+function getPlayerName (){
+  playerName = prompt("Please state your name");
+
+  // $.each(leaderBoard, function() {
+  //     if (this.name == playerName) {
+  //         this.value = lastScore;
+  //     }
+  // });
+
+  leaderBoard.push({name: playerName , value : 0});
+
+}
+
+// This is the current way to add a new player and reset the game....
+$('#newPlayer').on('click', function(e){
+  e.preventDefault;
+  getPlayerName();
+  setTimeout( function(){resetTheGame(false,randomNumber(),500)}, 500);
+
+});
+
+$('#newGame').on('click', function(e){
+  e.preventDefault;
+  setTimeout( function(){resetTheGame(false,randomNumber(),500)}, 500);
+});
+
+// This is the current way to get the user names.... 
+getPlayerName();
+
+// This was clipped from the web https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+function sortThis(board){
+  board.sort(function (a, b) {
+    if (b.value > a.value) {
+      return 1;
+    }
+    if (b.value < a.value) {
+      return -1;
+    }
+    // a must be equal to b
+    return 0;
+  });
+}
+
+
+function displayThis(board){
+console.log("leader Launched");
+
+$('ol').empty();
+
+  $.each(board, function(i,e){
+      $('#current-leaders').append('<li>'+e.name+': '+e.value+'</li>');
+  });
+
+  
+}
+
+function setHighScore(lastScore){
+
+  hiScore.push(lastScore);
+
+  var currentHighScore = Math.max.apply(Math,hiScore);
+
+
+
+  if (lastScore >= currentHighScore){
+
+    $.each(leaderBoard, function() {
+        if (this.name == playerName) {
+            this.value = lastScore;
+        }
+    });
+
+    console.log("NEW HIGH SCORE!");
+    console.log("This is the CHS: " + currentHighScore);
+    console.log("This is the LS: " + lastScore);
+  }
+  else{
+    $.each(leaderBoard, function() {
+        if (this.name == playerName) {
+            if (this.value < lastScore){
+            this.value = lastScore;
+          }
+        }
+    });
+    console.log("Not good Enough mate!");
+    console.log(hiScore);
+    console.log("This is the CHS: " + currentHighScore);
+    console.log("This is the LS: " + lastScore);
+  }
+
+
+  sortThis(leaderBoard);
+  displayThis(leaderBoard);
+
+  return currentHighScore;
+
+
+}
+
+
 
 // while it's playing a sequence display WAIT when it's done display GO
 function gameStatus(time){
@@ -129,13 +243,6 @@ function playSound(id){
 
 // This is to check if user is putting the right stuff in order! get max from array
 
-function setHighScore(lastScore){
-
-  hiScore.push(lastScore);
-
-  return Math.max.apply(Math,hiScore)
-}
-
 function checkSequence (){
 
   // stuff to check i'm not lost.....
@@ -200,6 +307,7 @@ function gamePusher (color,key){
     } 
 
 }
+
 
 
 // This put an event listener on the whole page so when I press an arrow button it changes the opacity of the divs

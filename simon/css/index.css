@@ -6,17 +6,80 @@ body{
 
 .leader-board{
   background-color: grey;
-  height: 800px;
-  width: 400px;
+  height: 780px;
+  width: 528px;
   float: left;
   position: relative;
   z-index: 3; 
 }
 
+ol {
+  padding-left: 91px;
+  list-style-position: outside;
+  list-style-type: upper-roman;
+}
+
+
+/*Borrowed from RANE*/
+
+h2 {
+  color: rgb(242, 138, 40);
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 88px;
+}
+
+
+/*Borrowed from RANE*/
+li {
+  height: 32.1px;
+  padding: 0 10px;
+  font-size: 40px;
+  font-weight: 700;
+
+  line-height: 35px;
+  color: #ffc719;
+  background: black;
+  text-transform: uppercase;
+}
+
+#options{
+  background-color: black;
+  height: 150px;
+  width: 528px;
+  position: absolute; 
+  bottom: 0;
+
+  height: 35px;
+  padding: 0 10px;
+  font-size: 40px;
+  font-weight: 700;
+
+  line-height: 35px;
+  color: #ffc719;
+  background: black;
+  text-transform: uppercase;
+
+}
+
+ul li{
+  color: #ff0044;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 25px;
+  display: inline-block;
+  padding-right: 9px;
+  padding-left: 1px;
+}
+
+
+
+
 #container{
   width: 750px;
-  height: 780px;
+  height: 760px;
   margin-left: 25px;
+  margin-right: 23px;
   margin-top: 25px;
   border: 2px solid black;
   z-index: -1;
