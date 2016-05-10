@@ -72,7 +72,7 @@ var playerName;
 
                       ];
 
-function getPlayerName (id){
+function getPlayerName (playerName){
   // playerName = prompt("Please state your name");
 
   // $.each(leaderBoard, function() {
@@ -81,7 +81,7 @@ function getPlayerName (id){
   //     }
   // });
 
-  leaderBoard.push({name: id , value : 0});
+  leaderBoard.push({name: playerName , value : 0});
 
 }
 
@@ -95,34 +95,35 @@ $('#newPlayer').on('click', function(e){
 
   $('#getPlayerName').fancybox().click();
 
-  $('#submit').on('click', function (e){
-    console.log(e);
-
-    playerName = ($("#newPlayerName").val());
-    if (playerName != null && playerName != ""){
-    getPlayerName(playerName);
-    $("#newPlayerName").val('');
-
-    // $("#getPlayerName").fancybox.close();
-    // $('#getPlayerName').fancybox().css("display", "none");
-    $.fancybox.close();
-    runGame(500);
-
-    }
-    else{
-      console.log("it's null!");
-    }
-  });
-
-  $("#player").click(function(e){
-    e.preventDefault();
-    e.stopPropagation();
-
-
-  });
-
   // getPlayerName();
   // setTimeout( function(){resetTheGame(false,randomNumber(),500)}, 500);
+
+});
+
+// this is new pusher.... when you enter a name the game runssss.....
+$('#submit').on('click', function (e){
+  console.log(e);
+
+  playerName = ($("#newPlayerName").val());
+  if (playerName != null && playerName != ""){
+  getPlayerName(playerName);
+  console.log(playerName);
+
+  // $("#getPlayerName").fancybox.close();
+  // $('#getPlayerName').fancybox().css("display", "none");
+  $.fancybox.close();
+  runGame(500);
+
+  }
+  else{
+    console.log("it's null!");
+  }
+});
+
+$("#player").click(function(e){
+  e.preventDefault();
+  e.stopPropagation();
+
 
 });
 
@@ -171,6 +172,9 @@ function setHighScore(lastScore){
   hiScore.push(lastScore);
 
   var currentHighScore = Math.max.apply(Math,hiScore);
+
+  console.log(playerName);
+
 
 
 
