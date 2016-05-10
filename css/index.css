@@ -19,6 +19,32 @@ body{
   background-color: black;
 }
 
+.ruleBox{
+  height: 540px;
+  width: 800px;
+  background-color: black;
+}
+
+#newPlayerName{
+
+/*  height: 32.1px;
+*/  
+  padding: 0 10px;
+  font-size: 80px;
+  font-weight: 700;
+  border: none;
+  color: #ff0044;
+  background: black;
+  text-transform: uppercase;
+
+}
+
+
+textarea:focus, input:focus{
+    outline: none;
+    border: none;
+}
+
 ol {
   padding-left: 91px;
   list-style-position: outside;

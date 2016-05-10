@@ -94,7 +94,7 @@ $('#newPlayer').on('click', function(e){
 
 
   $('#getPlayerName').fancybox().click();
-
+  $('#newPlayerName').focus();
   // getPlayerName();
   // setTimeout( function(){resetTheGame(false,randomNumber(),500)}, 500);
 
@@ -112,6 +112,7 @@ $('#submit').on('click', function (e){
   // $("#getPlayerName").fancybox.close();
   // $('#getPlayerName').fancybox().css("display", "none");
   $.fancybox.close();
+  $("#newPlayerName").val('');
   runGame(500);
 
   }
