@@ -184,9 +184,10 @@ function moves(e) {
 
 // Turning on the game
 function power (){
+        
         showMyRules();
-
-        $('#showInstructions').fancybox().open();
+        $('#showInstructionsFirstTime').fancybox().click();
+        // $('#showInstructions').fancybox().open();
 
         // event listener on the new Play text
         $('#newPlayer').on('click', function(e){
