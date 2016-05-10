@@ -1,15 +1,35 @@
 body{
   background-color: black;
   font-family: 'Montserrat', sans-serif;
-  color: black;
+  color: white;
+}
+
+.leader-board{
+  background-color: grey;
+  height: 800px;
+  width: 400px;
+  float: left;
+  position: relative;
+  z-index: 3; 
 }
 
 #container{
-  width: 640px;
-  height: 750px;
-  margin: 0 auto;
+  width: 750px;
+  height: 780px;
+  margin-left: 25px;
+  margin-top: 25px;
   border: 2px solid black;
   z-index: -1;
+  position: relative;
+  float: right;
+}
+
+#myDisc{
+  height: 640px;
+  width: 640px;
+  -ms-transform: rotate(-45deg); /* IE 9 */
+  -webkit-transform: rotate(-45deg); /* Chrome, Safari, Opera */
+  transform: rotate(-45deg);
   position: relative;
 }
 
@@ -21,6 +41,7 @@ body{
   margin-left: 10px;
   margin-top: 10px;
 }
+
 
 .score-box{
   width: 300px;
@@ -37,45 +58,40 @@ body{
 #red{
   background-color: red;
   opacity: 0.4;
+  border-radius: 100% 0 0 0;
 }
 
 #green{
   background-color: green;
   opacity: 0.4;
-
+  border-radius: 0 100% 0 0;
 }
 
 #yellow{
   background-color: yellow;
   opacity: 0.4;
+  border-radius: 0 0 100% 0;
+
 }
 
 #blue{
   background-color: blue;
   opacity: 0.4;
+  border-radius: 0 0 0 100%;
+
 }
 
 #inner-circle{
   border-radius: 50%;
-  border: 2px solid black;
+  text-align: center;
+  font-size: 100px;
   width: 300px;
   height: 300px; 
   background-color: black;
-  position: relative;
   z-index: 1;
   margin: 0 auto;
+  margin-left: 170px;
   margin-top: 170px;
+  transform: rotate(45deg);
+  position: absolute;
 }
-
-/*#outer-circle{
-  border-radius: 50%;
-  border: 2px solid black;
-  margin-top: -100px;
-  width: 300px;
-  height: 300px; 
-  background-color: black;
-  margin: 0 auto;
-  z-index: 4;
-  clear: both;
-
-}*/

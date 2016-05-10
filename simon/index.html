@@ -2,43 +2,63 @@
 <html>
 <head>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
-  <script type="text/javascript" src="./js/index.js"></script>
+  <script type="text/javascript" src="./js/index-workingpreobject2.js"></script>
   <link rel="stylesheet" type="text/css" href="./css/reset.css">
   <link rel="stylesheet" type="text/css" href="./css/index.css">
   <title>Simon Says</title>
 </head>
 <body>
 
+<div class="leader-board">
+    <ol id="current-leaders">
+      
+
+    </ol>
+
+</div>
 <div id="container">
-      <div class="color-box" id="red">
-        <audio id="redPlay" src="./sounds/redPlay.wav" type="audio/mpeg"></audio>
-        LEFT
-      </div>
+      <div id="myDisc">
+      <div id="inner-circle"></div>
+
+            <div class="color-box" id="red">
+              <audio id="redPlay" src="./sounds/redPlay.wav" type="audio/mpeg"></audio>
+              
+            </div>
+            
+            <div class="color-box" id="green">
+            <audio id="greenPlay" src="./sounds/greenPlay.wav" type="audio/mpeg"></audio>
+              
+            </div>
+            
+            <div class="color-box" id="blue">
+            <audio id="bluePlay" src="./sounds/bluePlay.wav" type="audio/mpeg">></audio>
+              
+            </div>
+            
+            <div class="color-box" id="yellow">
+            <audio id="yellowPlay" src="./sounds/yellowPlay.wav" type="audio/mpeg">></audio>
+              
+            </div>
+
       
-      <div class="color-box" id="green">
-      <audio id="greenPlay" src="./sounds/greenPlay.wav" type="audio/mpeg"></audio>
-        UP
+
       </div>
-      
-      <div class="color-box" id="blue">
-      <audio id="bluePlay" src="./sounds/bluePlay.wav" type="audio/mpeg">></audio>
-        DOWN
-      </div>
-      
-      <div class="color-box" id="yellow">
-      <audio id="yellowPlay" src="./sounds/yellowPlay.wav" type="audio/mpeg">></audio>
-        RIGHT
-      </div>
-      
+
       <div class="score-box" id="playerScore">0</div>
       <div class="score-box" id="hiScore"></div>
+    
 
       <audio id="#referee"></audio>
 
-      <div id="inner-circle"></div>
-
 </div>
 
+<!-- <div class="leader-board">
+    <ol id="current-leaders">
+      
+
+    </ol>
+
+</div> -->
 
 
 </body>
