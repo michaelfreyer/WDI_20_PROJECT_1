@@ -1,25 +1,6 @@
 console.log("I'm on the game");
-// put the functions in an object and then have it prototype new funcitons in each part ofthe game!!!
-// It would be nice to have something that differentiates between no play and play - glowing outside box.... 
-
-// Game speed up
-// Different game states - when it is your turn
-// Style the black circles: DONE
-// Make the REF announce wins and streaks!
-
-
-// To Do List Tomorrow
-
-// LEADER BOARD
-// List of Scores sorted from top to bottom
-
-
-
-
 // Welcome Diaglog
 // Tell you the game rules - watch the screen for the parten then play the partern
-
-
 
 $(init);
 
@@ -27,7 +8,7 @@ function init (){
   console.log("I'm loaded too!")
 
 // This is my boolean to make sure only one game is running....
-  var killTheGame = false;
+  // var killTheGame = false;
 
 // This stores the played moves
   var userMoves = [];
@@ -35,16 +16,13 @@ function init (){
 // this stores how many moves we have
   var playerToken = 0;
  
-// If the game is over
-  var gameOver = false;
-
 // setTimeout delay
   var time = 0;
 
 // need a place holder to decrease as you get higher in the sequence...
   var difficultyLevel = 0;
 
-  // Need something to take time and half it for light up and loight out
+// Need something to take time and half it for light up and loight out
   var lightSpeed = 0;
 
 // My sequece to test
@@ -65,83 +43,204 @@ function init (){
 // Player Name to add
 var playerName;
 
-  var leaderBoard = [
-                      // {name : 'Mike'  , value : 3 },
-                      // {name : 'John'  , value : 7 },
-                      // {name : 'Jeffe' , value : 9}
+// Array to hold obejcts of players
+var leaderBoard = [];
 
-                      ];
 
+// This is the core game logic - difficulty sets the speed and that then sets all other elements... how fast the lights move timing of the seuqences.... etc..
+
+function runGame(difficulty){
+
+    time = difficulty;
+    lightSpeed = difficulty/2;
+    difficultyLevel = difficulty;
+
+
+    for (var i = 0 ; i < mySequence.length ; i++){      
+          console.log(mySequence[i]);
+
+          switch(mySequence[i]){
+            
+          case 37:      timer = setTimeout(function(){
+                        console.log("RED");
+                        moves(37);
+                        }
+                        , time);
+                        timer;
+                        time += difficulty;
+          break;
+
+          case 38:      timer = setTimeout(function(){
+                        console.log("GREEN");
+                        moves(38);
+                        }
+                        , time);
+                        timer;
+                        time+= difficulty;
+          break;
+
+          case 39:      timer = setTimeout(function(){
+                        console.log("YELLOW");
+                        moves(39);
+                        }
+                        , time);
+                        timer;
+                        time+= difficulty;
+          break;
+
+          case 40:      timer = setTimeout(function(){
+                        console.log("BLUE");
+                        moves(40);
+                        }
+                        , time);
+                        timer;
+                        time+= difficulty;
+          break;
+
+          }
+    // }
+    
+      }
+
+      // put something here that stops the user from pressing buttons.... .delay(time)
+      playerAllowedToMove(time);
+      gameStatus(time);
+
+  }
+
+
+// This put an event listener on the whole page so when I press an arrow button it changes the opacity of the divs
+function playerAllowedToMove(time){
+
+// Switch off the keylisten while the patern runs to avoid false inputs
+  $document.off('keydown');
+
+// switch it back on....
+  mover = setTimeout( function (){
+    console.log("MAKE A MOVE")
+  
+  $document.on('keydown', function(e){
+
+      switch(e.which){
+        case 37:  $document.off('keydown');
+                  gamePusher("#red",37);
+                  playSound("redPlay");
+        break;
+
+        case 38:  $document.off('keydown');
+                  gamePusher("#green", 38);
+                  playSound("greenPlay");
+        break;
+
+        case 39:  $document.off('keydown');
+                  gamePusher("#yellow", 39);
+                  playSound("yellowPlay");
+        break;
+
+        case 40:  $document.off('keydown');
+                  gamePusher("#blue", 40);
+                  playSound("bluePlay");
+        break;
+      }
+
+
+    
+  });    
+
+  }, time);
+
+}
+
+
+
+// This is the mover for the computer sequence
+function moves(e) {
+  
+  switch(e){
+        case 37:  console.log("You pressed LEFT");
+                  lightUp("#red",lightSpeed);
+                  playSound("redPlay");
+        break;
+
+        case 38:  console.log("You pressed UP");
+                  lightUp("#green",lightSpeed);
+                  playSound("greenPlay");
+
+        break;
+        
+        case 39:  console.log("You pressed RIGHT");
+                  lightUp("#yellow",lightSpeed);
+                  playSound("yellowPlay");
+
+        break;
+        
+        case 40:  console.log("You pressed DOWN");
+                  lightUp("#blue", lightSpeed);
+                  playSound("bluePlay");
+
+        break;
+      }
+}
+
+// Turning on the game
+function power (){
+        showMyRules();
+
+        $('#showInstructions').fancybox().open();
+
+        // event listener on the new Play text
+        $('#newPlayer').on('click', function(e){
+          
+          e.preventDefault();
+          e.stopPropagation();
+
+          $('#getPlayerName').fancybox().click();
+          $('#newPlayerName').focus();
+
+        });
+
+        // this is new pusher.... when you enter a name the game runssss.....
+        $('#submit').on('click', function (e){
+          playerName = ($("#newPlayerName").val());
+          if (playerName != null && playerName != ""){
+            getPlayerName(playerName);
+            console.log(playerName);
+            $.fancybox.close();
+            $("#newPlayerName").val('');
+            score = 0;          
+            setTimeout( function(){resetTheGame(false,randomNumber(),500)}, 1200);
+          }
+          else{
+            console.log("it's null!");
+          }
+        });
+
+        //stop the default input text 
+        $("#player").click(function(e){
+          e.preventDefault();
+          e.stopPropagation();
+        });
+}
+
+function showMyRules(){
+  // Show the insturctions on screen
+  $('#inst').on('click', function(e){
+    e.preventDefault;
+
+    $('#showInstructions').fancybox().click();
+
+  });
+}
+
+// This a function to add a new player to our leaderboard array and set them with a default value of 0
 function getPlayerName (playerName){
-  // playerName = prompt("Please state your name");
-
-  // $.each(leaderBoard, function() {
-  //     if (this.name == playerName) {
-  //         this.value = lastScore;
-  //     }
-  // });
 
   leaderBoard.push({name: playerName , value : 0});
 
 }
 
-// This is the current way to add a new player and reset the game....
-$('#newPlayer').on('click', function(e){
-  
-  e.preventDefault();
-  e.stopPropagation();
-  console.log(e);
 
-
-  $('#getPlayerName').fancybox().click();
-  $('#newPlayerName').focus();
-  // getPlayerName();
-  // setTimeout( function(){resetTheGame(false,randomNumber(),500)}, 500);
-
-});
-
-// this is new pusher.... when you enter a name the game runssss.....
-$('#submit').on('click', function (e){
-  console.log(e);
-
-  playerName = ($("#newPlayerName").val());
-  if (playerName != null && playerName != ""){
-  getPlayerName(playerName);
-  console.log(playerName);
-
-  // $("#getPlayerName").fancybox.close();
-  // $('#getPlayerName').fancybox().css("display", "none");
-  $.fancybox.close();
-  $("#newPlayerName").val('');
-  runGame(500);
-
-  }
-  else{
-    console.log("it's null!");
-  }
-});
-
-$("#player").click(function(e){
-  e.preventDefault();
-  e.stopPropagation();
-
-
-});
-
-
-
-// Show the insturctions 
-$('#inst').on('click', function(e){
-  e.preventDefault;
-
-  $('#showInstructions').fancybox().click();
-
-});
-
-// This is the current way to get the user names.... 
-// getPlayerName();
-
-// This was clipped from the web https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+// This was clipped from the web https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort I just want to sort what ever array I'm given
 function sortThis(board){
   board.sort(function (a, b) {
     if (b.value > a.value) {
@@ -156,6 +255,7 @@ function sortThis(board){
 }
 
 
+//this is how I push my leaderboard info to my page
 function displayThis(board){
 console.log("leader Launched");
 
@@ -164,9 +264,10 @@ $('#current-leaders').empty();
   $.each(board, function(i,e){
       $('#current-leaders').append('<li>'+e.name+': '+e.value+'</li>');
   });
-
-  
 }
+
+
+//this compares what the score is to the highest recorded player score - independantly from the rest of the game. it then sorts the board and updates the display
 
 function setHighScore(lastScore){
 
@@ -175,9 +276,6 @@ function setHighScore(lastScore){
   var currentHighScore = Math.max.apply(Math,hiScore);
 
   console.log(playerName);
-
-
-
 
   if (lastScore >= currentHighScore){
 
@@ -216,10 +314,8 @@ function setHighScore(lastScore){
 
 
 
-// while it's playing a sequence display WAIT when it's done display GO
+// while it's playing a sequence display WAIT when it's done display GO - made it easier for people to know what to do!
 function gameStatus(time){
-  
-
   $('#inner-circle').html("<br>WAIT");
 
   var statusTimer = setTimeout(function(){
@@ -232,7 +328,41 @@ function gameStatus(time){
 
 }
 
-// Rest the Game  - will use ths in both cases.....
+// its between 37 and 40 so I'll need to just have a switch to reutrn a different number
+function randomNumber(){
+      return  Math.floor(Math.random()*(40-37+1)+37);
+  }
+
+
+// Add a new number to the array 37,38,39,40
+function addColorToPatern (){
+    mySequence.push(randomNumber());
+}
+
+// This is my animation funciton that I use EVERYWHERE! 
+function lightUp(id,howFast){
+  $(id).animate({
+                  opacity: 1.0,
+                  queue : true},
+                  howFast, 
+                  function (){
+                    $(id).animate({
+                                        opacity: 0.4},
+                                        howFast)
+
+                  });
+  // console.log(idPlay);
+}
+
+// this is my play sound function it allows me to play sounds
+function playSound(id){
+  var gameAudio = document.getElementById(id)
+  console.log(id);
+  gameAudio.play();
+}
+
+
+// Reset the Game  - will use ths in both cases..... of a win or loose.... 
 function resetTheGame(playerWon,startPosition,speed){
   
   userMoves = [];
@@ -252,40 +382,8 @@ function resetTheGame(playerWon,startPosition,speed){
   }
 
 }
-// its between 37 and 40 so I'll need to just have a switch to reutrn a different number
-function randomNumber(){
-      return  Math.floor(Math.random()*(40-37+1)+37);
-  }
-
-
-// Add a new number to the array 37,38,39,40
-function addColorToPatern (){
-    mySequence.push(randomNumber());
-}
-
-// This is my animation funciton that I use EVERYWHERE!
-function lightUp(id,howFast){
-  $(id).animate({
-                  opacity: 1.0,
-                  queue : true},
-                  howFast, 
-                  function (){
-                    $(id).animate({
-                                        opacity: 0.4},
-                                        howFast)
-
-                  });
-  // console.log(idPlay);
-}
-
-function playSound(id){
-  var gameAudio = document.getElementById(id)
-  console.log(id);
-  gameAudio.play();
-}
 
 // This is to check if user is putting the right stuff in order! get max from array
-
 function checkSequence (){
 
   // stuff to check i'm not lost.....
@@ -353,155 +451,10 @@ function gamePusher (color,key){
 
 
 
-// This put an event listener on the whole page so when I press an arrow button it changes the opacity of the divs
-function playerAllowedToMove(time){
-
-// Switch off the keylisten while the patern runs to avoid false inputs
-  $document.off('keydown');
-
-// switch it back on....
-  mover = setTimeout( function (){
-    console.log("MAKE A MOVE")
-  
-  $document.on('keydown', function(e){
-
-      switch(e.which){
-        case 37:  $document.off('keydown');
-                  gamePusher("#red",37);
-                  playSound("redPlay");
-        break;
-
-        case 38:  $document.off('keydown');
-                  gamePusher("#green", 38);
-                  playSound("greenPlay");
-        break;
-
-        case 39:  $document.off('keydown');
-                  gamePusher("#yellow", 39);
-                  playSound("yellowPlay");
-        break;
-
-        case 40:  $document.off('keydown');
-                  gamePusher("#blue", 40);
-                  playSound("bluePlay");
-        break;
-      }
 
 
-    
-  });    
-
-  }, time);
-
-}
-
-// Run a pattern
-
-// Key up..... last of key up while keydown === true DONT RUN ANOYTHING // SPACE TO START
-
-function moves(e) {
-  
-  switch(e){
-        case 37:  console.log("You pressed LEFT");
-                  lightUp("#red",lightSpeed);
-                  playSound("redPlay");
-        break;
-
-        case 38:  console.log("You pressed UP");
-                  lightUp("#green",lightSpeed);
-                  playSound("greenPlay");
-
-        break;
-        
-        case 39:  console.log("You pressed RIGHT");
-                  lightUp("#yellow",lightSpeed);
-                  playSound("yellowPlay");
-
-        break;
-        
-        case 40:  console.log("You pressed DOWN");
-                  lightUp("#blue", lightSpeed);
-                  playSound("bluePlay");
-
-        break;
-      }
-}
-
-  function runGame(difficulty){
-
-    // flashAllColors();
-
-    
-    time = difficulty;
-    lightSpeed = difficulty/2;
-    difficultyLevel = difficulty;
-
-
-    for (var i = 0 ; i < mySequence.length ; i++){      
-          console.log(mySequence[i]);
-
-          switch(mySequence[i]){
-            
-          case 37:      timer = setTimeout(function(){
-                        console.log("RED");
-                        moves(37);
-                        }
-                        , time);
-                        timer;
-                        time += difficulty;
-          break;
-
-          case 38:      timer = setTimeout(function(){
-                        console.log("GREEN");
-                        moves(38);
-                        }
-                        , time);
-                        timer;
-                        time+= difficulty;
-          break;
-
-          case 39:      timer = setTimeout(function(){
-                        console.log("YELLOW");
-                        moves(39);
-                        }
-                        , time);
-                        timer;
-                        time+= difficulty;
-          break;
-
-          case 40:      timer = setTimeout(function(){
-                        console.log("BLUE");
-                        moves(40);
-                        }
-                        , time);
-                        timer;
-                        time+= difficulty;
-          break;
-
-          }
-    // }
-    
-      }
-
-      // put something here that stops the user from pressing buttons.... .delay(time)
-      playerAllowedToMove(time);
-      gameStatus(time);
-
-  }
-
-
-
-
-
-// Start the game!
-  // runGame(500);
-
-// $document.on('keydown', function(e){
-//   console.log(e.which);
-// })
-
-
-
+  // RUN THE GAME!
+  power();
 
   // EOL
 };
