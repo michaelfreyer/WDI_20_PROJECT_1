@@ -72,7 +72,7 @@ var playerName;
 
                       ];
 
-function getPlayerName (playerName){
+function getPlayerName (id){
   // playerName = prompt("Please state your name");
 
   // $.each(leaderBoard, function() {
@@ -81,7 +81,7 @@ function getPlayerName (playerName){
   //     }
   // });
 
-  leaderBoard.push({name: playerName , value : 0});
+  leaderBoard.push({name: id , value : 0});
 
 }
 
@@ -98,10 +98,16 @@ $('#newPlayer').on('click', function(e){
   $('#submit').on('click', function (e){
     console.log(e);
 
-    var tempVal = ($("#newPlayerName").val());
-    if (tempVal != null && tempVal != ""){
-    getPlayerName(tempVal);
+    playerName = ($("#newPlayerName").val());
+    if (playerName != null && playerName != ""){
+    getPlayerName(playerName);
+    $("#newPlayerName").val('');
+
+    // $("#getPlayerName").fancybox.close();
+    // $('#getPlayerName').fancybox().css("display", "none");
+    $.fancybox.close();
     runGame(500);
+
     }
     else{
       console.log("it's null!");
